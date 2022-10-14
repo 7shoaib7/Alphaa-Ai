@@ -13,7 +13,7 @@ const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
             text: "Waterfall"
         },
         legend: {
-            data: ["Loss", "Profit"]
+            data: ["Loss", "Profit","Net"],
         },
         grid: {
             left: "3%",
@@ -80,7 +80,7 @@ const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
                 data: [...lossData]
             },
             {
-                name: "Summary",
+                name: "Net",
                 type: "bar",
                 stack: "all",
                 label: {

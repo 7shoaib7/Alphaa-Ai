@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
@@ -36,3 +37,96 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.appData{
+  display:flex;
+  height: 80rem;
+  width:100%;
+  overflow: hidden;
+}
+.chart{
+  margin:2rem;
+  height: 80%;
+  width:100%;
+}
+
+.summary{
+  margin:2rem;
+  height: 50%;
+  width:20%;
+  background-color:whitesmoke;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  display: block;
+}
+
+.summaryBottom{
+  display: none;
+}
+
+.summaryCalculation{
+  margin-top:2rem;
+}
+
+.summaryProfit{
+  height:4rem;
+  width:100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  background-color:azure;
+}
+
+.summaryProfitDetails{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:1rem;
+}
+.summaryLoss{
+  height:4rem;
+  width:100%;
+  border-bottom: 1px solid black;
+  background-color:azure;
+}
+
+.summaryLossDetails{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:1rem;
+}
+.summaryNet{
+  height:4rem;
+  width:100%;
+  border-bottom: 1px solid black;
+  background-color:azure;
+}
+
+.summaryNetDetails{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:1rem;
+}
+
+
+
+@media (max-width: 767px){
+  .summary{
+    display:none
+  }
+  .summaryBottom{
+    display: block;
+  }
+  /* .summaryCalculation{
+    margin-top: 0;
+  }
+  .chart{
+    margin-bottom:0
+  } */
+  .appData{
+    height: 50rem;
+  }
+}
+

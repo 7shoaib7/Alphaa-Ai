@@ -5,28 +5,13 @@ import ReactEcharts from "echarts-for-react";
 const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
     const totalProfit = profitData.filter(item => item !== "-").reduce((tot, item) => tot + Number(item), 0);
     const totalLoss = lossData.filter(item => item !== "-").reduce((tot, item) => tot + Number(item), 0);
-    const net = totalProfit - totalLoss;
-    const summary = Array(16).fill("-");
+    const netTotal = totalProfit - totalLoss;
+    const summary = Array(placeholder.length).fill("-");
   
     let option = {
         title: {
             text: "Waterfall"
         },
-        // tooltip: {
-        //     trigger: "axis",
-        //     axisPointer: {
-        //         type: "shadow"
-        //     },
-        //     formatter: function (params) {
-        //         let tar;
-        //         if (params[1].value !== "-") {
-        //             tar = params[1];
-        //         } else {
-        //             tar = params[0];
-        //         }
-        //         return tar.name + "<br/>" + tar.seriesName + " : " + tar.value;
-        //     }
-        // },
         legend: {
             data: ["Loss", "Profit"]
         },
@@ -44,6 +29,7 @@ const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
                 for (let i = 0; i < profitLoss.length; i++) {
                     list.push(profitLoss[i]["subcategory"]);
                 }
+                list.push("total")
                 return list;
             })()
         },
@@ -52,7 +38,7 @@ const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
         },
         series: [
             {
-                // name: "Placeholder",
+                name: "Placeholder",
                 type: "bar",
                 stack: "Total",
                 itemStyle: {
@@ -65,7 +51,7 @@ const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
                         color: "transparent"
                     }
                 },
-                data: placeholder
+                data: [...placeholder]
             },
             {
                 name: "Profit",
@@ -78,7 +64,7 @@ const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
                 itemStyle: {
                     color: "#b7e8ac"
                 },
-                data: profitData
+                data: [...profitData]
             },
             {
                 name: "Loss",
@@ -91,13 +77,17 @@ const AlphaaChart = ({ profitLoss, profitData, lossData, placeholder }) => {
                 itemStyle: {
                     color: "#e8acb3"
                 },
-                data: lossData
+                data: [...lossData]
             },
             {
                 name: "Summary",
                 type: "bar",
                 stack: "all",
-                data: [...summary, net],
+                label: {
+                    show: true,
+                    position: "top"
+                },
+                data: [...summary, netTotal],
                 itemStyle: {
                     color: "#accfe8"
                 }

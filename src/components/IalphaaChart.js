@@ -17,7 +17,7 @@ const IalphaaChart = ({profitData,lossData }) =>{
             <div className="summaryLoss">
                 <div className="summaryLossDetails">
                 <p>Loss</p>
-                <p>{totalLoss}</p>
+                <p>{-totalLoss}</p>
                 </div>
             </div>
             <div className="summaryNet">

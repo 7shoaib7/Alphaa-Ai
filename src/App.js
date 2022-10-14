@@ -5,7 +5,6 @@ import IalphaaChart from "./components/IalphaaChart";
 import './App.css';
 
 function App() {
-  const [chartdata, setData] = useState(false);
   const [profitLoss, setProfitLoss] = useState("");
   const [profitData, setProfitData] = useState([]);
   const [lossData, setLossData] = useState([]);
@@ -16,7 +15,7 @@ function App() {
       "https://run.mocky.io/v3/e2ffac92-48e0-4826-a59f-bf76fc727383"
     );
     const response = res.data.data;
-    setData(response);
+  
     const profitCategories = (response) => {
       return response.filter((item) => item.d__2022sale > item.d__2021sale);
     };
@@ -39,10 +38,10 @@ function App() {
       const res = lossCategories.map((item) => {
         return {
           subcategory: item.subcategory,
-          loss: item.d__2021sale - item.d__2022sale
+          loss: item.d__2022sale- item.d__2021sale 
         };
       });
-      return res.sort((a, b) => a.loss - b.loss);
+      return res.sort((a, b) => b.loss - a.loss);
     };
 
     const finalChartData = [
@@ -52,19 +51,19 @@ function App() {
 
     const profitArr = finalChartData.map((item) => {
       if (item.profit) {
-        return item.profit.toFixed(2);
+        return Number(item.profit.toFixed(2));
       }
       return "-";
     });
 
     const lossArr = finalChartData.map((item) => {
       if (item.loss) {
-        return item.loss.toFixed(2);
+        return -Number(item.loss.toFixed(2));
       }
       return "-";
     });
 
-    let forProfit = [0];
+    const forProfit = [0];
     for (let i = 0; i < finalChartData.length; i++) {
       if (i === 0) {
         forProfit.push(Number(finalChartData[0].profit.toFixed(2)));
@@ -79,17 +78,16 @@ function App() {
       }
     }
 
-    let forLoss = [];
-    let fil = lossArr.filter((item) => item !== "-");
-    for (let i = 0; i < fil.length; i++) {
-      forLoss.push(forProfit[forProfit.length - 1] - Number(fil[i]));
+    const forLoss = [];
+    const numberOfLossData = lossArr.filter((item) => item !== "-");
+    for (let i = 0; i < numberOfLossData.length; i++) {
+      forLoss.push(forProfit[forProfit.length - 1] - Number(numberOfLossData[i]));
     }
 
     setPlaceHolder([...forProfit.slice(0, forProfit.length - 1), ...forLoss]);
     setProfitLoss(finalChartData);
     setProfitData(profitArr);
     setLossData(lossArr);
-    // console.log(profitLoss);
   };
 
   useEffect(() => {
@@ -100,7 +98,7 @@ function App() {
     // console.log(profitLoss);
     // console.log(profitData);
     // console.log(lossData);
-    // console.log(placeholder);
+    // console.log(placeholder);  
   }, [profitLoss, profitData, lossData]);
   
   

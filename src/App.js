@@ -64,16 +64,15 @@ function App() {
     });
 
     const forProfit = [0];
+    let sum = 0 
     for (let i = 0; i < finalChartData.length; i++) {
       if (i === 0) {
         forProfit.push(Number(finalChartData[0].profit.toFixed(2)));
+        sum += Number(finalChartData[0].profit.toFixed(2))
       } else {
         if (finalChartData[i].profit) {
-          forProfit.push(
-            finalChartData
-              .slice(0, i + 1)
-              .reduce((tot, item) => tot + Number(item.profit.toFixed(2)), 0)
-          );
+          sum += Number(finalChartData[i].profit.toFixed(2))
+          forProfit.push(sum);
         }
       }
     }
